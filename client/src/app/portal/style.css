@@ -23,7 +23,8 @@
   h1 {
     font-weight: bold;
     font-size: 34px;
-    margin: 0;
+    margin-top: 20px;
+    margin-bottom: -28px;
   }
   
   h2 {
@@ -89,10 +90,10 @@
   input {
     background-color: #EEEEEE;
     border-radius: 5px;
-    border: none;
     padding: 12px 15px;
     margin: 8px 0;
     width: 100%;
+    color: black !important;
   }
   
   .container {
@@ -103,7 +104,7 @@
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 540px;
   }
   
   .form-container {

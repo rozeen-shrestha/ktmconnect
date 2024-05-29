@@ -1,13 +1,24 @@
-import userSlice from "../reducerSlices/userSlice"
+import { configureStore, Tuple, combineReducers } from '@reduxjs/toolkit'
+import userSlice from '../slices/userSlice'
+import productSlice from '../slices/productSlice';
+import logger from 'redux-logger'
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore } from 'redux-persist';
+const persistConfig = {
+    key: 'root',
+    storage,
+  }
+  const rootReducer = combineReducers({ 
+    user: userSlice,
+    product: productSlice,
 
-import { configureStore, Tuple } from '@reduxjs/toolkit'
-import logger from "redux-logger";
+  })
 
-const store = configureStore({
-    reducer:{
-        user: userSlice
-    },
-    middleware: () => new Tuple(logger),
+  const persistedReducer = persistReducer(persistConfig, rootReducer)  
+export const store = configureStore({
+    reducer: persistedReducer,
+  middleware: () => new Tuple( logger),
+
 })
 
-export default store
+export const persistor = persistStore(store)

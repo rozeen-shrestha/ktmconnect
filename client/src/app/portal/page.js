@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./style.css";
 import SignInForm from "@/components/signin/page";
-import SignUpForm from "@/components/singout/page";
+import SignUpForm from "@/components/singup/page";
 
 export default function App() {
   const [type, setType] = useState("signIn");
@@ -17,8 +17,8 @@ export default function App() {
   return (
     <div className="App">
       <div className={containerClass} id="container">
-        <SignUpForm />
-        <SignInForm />
+        {type === "signUp" && <SignUpForm />}
+        {type === "signIn" && <SignInForm />}
         <div className="overlay-container">
           <div className="overlay rounded-md">
             <div className="overlay-panel overlay-left">
