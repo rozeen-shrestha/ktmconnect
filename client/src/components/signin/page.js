@@ -22,9 +22,27 @@ export default function SignInForm({ headerText, handleOnClick }) {
         })}
         onSubmit={(values, { setSubmitting, resetForm }) => {
           setTimeout(() => {
-            alert(
-              `You are login with email: ${values.email} and password: ${values.password}`
-            );
+            const formData = {
+              email: values.email,
+              password: values.password
+            };
+
+            fetch('http://localhost:5000/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+            })
+             .then(response => response.json())
+             .then(data => {
+                console.log(data);
+                if (data.msg === 'User Logged in') {
+                  alert('User logged in!');
+                }   
+             })
+             .catch(error => console.error(error));
+
             resetForm();
             setSubmitting(false);
           }, 400);
@@ -49,4 +67,3 @@ export default function SignInForm({ headerText, handleOnClick }) {
     </div>
   );
 }
-

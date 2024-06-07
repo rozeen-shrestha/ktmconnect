@@ -2,6 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+
 export default function SignUpForm({ headerText, handleOnClick }) {
   return (
     <div className="form-container sign-up-container">
@@ -44,11 +45,12 @@ export default function SignUpForm({ headerText, handleOnClick }) {
               headers: {
                 'Content-Type': 'application/json'
               },
-              body: formData
+              body: JSON.stringify(formData)
             })
              .then(response => response.json())
              .then(data => console.log(data))
              .catch(error => console.error(error));
+
 
             resetForm();
             setSubmitting(false);
