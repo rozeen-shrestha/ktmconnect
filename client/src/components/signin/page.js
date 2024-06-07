@@ -1,10 +1,13 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { toast, Toaster } from 'react-hot-toast';
 
 export default function SignInForm({ headerText, handleOnClick }) {
   return (
+
     <div className="form-container sign-in-container">
+      <div><Toaster/></div>
       <h1>Login</h1>
 
       <Formik
@@ -38,8 +41,34 @@ export default function SignInForm({ headerText, handleOnClick }) {
              .then(data => {
                 console.log(data);
                 if (data.msg === 'User Logged in') {
-                  alert('User logged in!');
-                }   
+                  
+                  toast.success(data.msg, {
+                    style: {
+                      border: '1px solid #713200',
+                      padding: '16px',
+                      color: '#000000',
+                      backgroundColor: '#808080	',
+                    },
+                    iconTheme: {
+                      primary: '#000000',
+                      secondary: '#FFFAEE',
+                    },
+                  });
+                }
+                else{
+                  toast.error(data.msg, {
+                    style: {
+                      border: '1px solid #713200',
+                      padding: '16px',
+                      color: '#000000',
+                      backgroundColor: '#808080	',
+                    },
+                    iconTheme: {
+                      primary: '#000000',
+                      secondary: '#FFFAEE',
+                    },
+                  });
+                }
              })
              .catch(error => console.error(error));
 

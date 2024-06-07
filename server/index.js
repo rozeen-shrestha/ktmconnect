@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
     }
   }
   else {
-    return res.json({msg:`Users with email ${req.body.email} Not Found`});
+    return res.json({msg:`${req.body.email} is not a registered user`});
   }
   } catch (err) {
     console.error(err);

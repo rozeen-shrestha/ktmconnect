@@ -1,5 +1,7 @@
+// App.js
 'use client'
 import React, { useState } from "react";
+import { Toast } from "@rafty/ui";
 import "./style.css";
 import SignInForm from "@/components/signin/page";
 import SignUpForm from "@/components/singup/page";

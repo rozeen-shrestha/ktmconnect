@@ -1,11 +1,14 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import toast,{Toaster} from "react-hot-toast";
 
 
 export default function SignUpForm({ headerText, handleOnClick }) {
   return (
-    <div className="form-container sign-up-container">
+    <div>  
+      <div><Toaster/></div> 
+      <div className="form-container sign-up-container">
       <h1>Create An Account</h1>
       <Formik
         initialValues={{
@@ -47,9 +50,40 @@ export default function SignUpForm({ headerText, handleOnClick }) {
               },
               body: JSON.stringify(formData)
             })
-             .then(response => response.json())
-             .then(data => console.log(data))
-             .catch(error => console.error(error));
+            .then(response => response.json())
+            .then(data => {
+               console.log(data);
+               if (data.msg === 'User Logged in') {
+                 
+                 toast.success(data.msg, {
+                   style: {
+                     border: '1px solid #713200',
+                     padding: '16px',
+                     color: '#000000',
+                     backgroundColor: '#808080	',
+                   },
+                   iconTheme: {
+                     primary: '#000000',
+                     secondary: '#FFFAEE',
+                   },
+                 });
+               }
+               else{
+                 toast.error(data.msg, {
+                   style: {
+                     border: '1px solid #713200',
+                     padding: '16px',
+                     color: '#000000',
+                     backgroundColor: '#808080	',
+                   },
+                   iconTheme: {
+                     primary: '#000000',
+                     secondary: '#FFFAEE',
+                   },
+                 });
+               }
+            })
+            .catch(error => console.error(error));
 
 
             resetForm();
@@ -72,5 +106,7 @@ export default function SignUpForm({ headerText, handleOnClick }) {
         )}
       </Formik>
     </div>
+    </div>
+ 
   );
 }
